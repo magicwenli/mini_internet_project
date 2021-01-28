@@ -38,14 +38,14 @@ if [[ "$is_dns" -eq 0 ]]; then
     echo "There is no DNS server, skipping dns_setup.sh"
 else
     # dns
-    docker run -itd --net='none' --name="DNS" --privileged \
+    isula run -itd --net='none' --name="DNS" --privileged \
         -v /etc/timezone:/etc/timezone:ro \
         -v /etc/localtime:/etc/localtime:ro \
         thomahol/d_dns
 
     # cache the container pid for ovs-docker.sh
     source "${DIRECTORY}/groups/docker_pid.map"
-    DOCKER_TO_PID["DNS"]=$(docker inspect -f '{{.State.Pid}}' DNS)
+    DOCKER_TO_PID["DNS"]=$(isula inspect -f '{{.State.Pid}}' DNS)
     declare -p DOCKER_TO_PID > "${DIRECTORY}/groups/docker_pid.map"
     source "${DIRECTORY}/setup/ovs-docker.sh"
 
@@ -95,10 +95,10 @@ else
     done
 
     # copy dns config files to container generated from dns_config.sh
-    docker cp "${DIRECTORY}"/groups/dns/group_config DNS:/etc/bind/group_config
-    docker cp "${DIRECTORY}"/groups/dns/zones DNS:/etc/bind/zones
-    docker cp "${DIRECTORY}"/groups/dns/named.conf.local DNS:/etc/bind/named.conf.local
-    docker cp "${DIRECTORY}"/groups/dns/named.conf.options DNS:/etc/bind/named.conf.options
+    isula cp "${DIRECTORY}"/groups/dns/group_config DNS:/etc/bind/group_config
+    isula cp "${DIRECTORY}"/groups/dns/zones DNS:/etc/bind/zones
+    isula cp "${DIRECTORY}"/groups/dns/named.conf.local DNS:/etc/bind/named.conf.local
+    isula cp "${DIRECTORY}"/groups/dns/named.conf.options DNS:/etc/bind/named.conf.options
 
     # connect measurement to dns service
     br_name="dns_measurement"

@@ -41,7 +41,7 @@ else
 
 
     # start matrix container
-    docker run -itd --net='none' --name="MATRIX" --privileged --pids-limit 500 \
+    isula run -itd --net='none' --name="MATRIX" --privileged --pids-limit 500 \
         --sysctl net.ipv4.icmp_ratelimit=0 \
         -v /etc/timezone:/etc/timezone:ro \
         -v /etc/localtime:/etc/localtime:ro \
@@ -50,7 +50,7 @@ else
 
     # cache the docker pid for ovs-docker.sh
     source ${DIRECTORY}/groups/docker_pid.map
-    DOCKER_TO_PID['MATRIX']=$(docker inspect -f '{{.State.Pid}}' MATRIX)
+    DOCKER_TO_PID['MATRIX']=$(isula inspect -f '{{.State.Pid}}' MATRIX)
     declare -p DOCKER_TO_PID > ${DIRECTORY}/groups/docker_pid.map
 
     echo -n "-- add-br matrix " >> "${DIRECTORY}"/groups/add_bridges.sh

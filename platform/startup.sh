@@ -244,8 +244,8 @@ echo ""
 echo ""
 
 # restart dns server with new configs
-if [ -n "$(docker ps | grep "DNS")" ]; then
-    docker exec -d DNS service bind9 restart
+if [ -n "$(isula ps | grep "DNS")" ]; then
+    isula exec -d DNS service bind9 restart
 fi
 
 echo "$(date +%Y-%m-%d_%H-%M-%S)"

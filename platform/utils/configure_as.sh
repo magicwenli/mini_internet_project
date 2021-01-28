@@ -6,11 +6,11 @@ do
     rid=1
     for router_name in LOND ZURI PARI GENE NEWY BOST ATLA MIAM
     do
-        docker cp groups/g${group_number}/${router_name}/init_full_conf.sh ${group_number}_${router_name}router:/home/
-        docker exec -it ${group_number}_${router_name}router ./home/init_full_conf.sh
+        isula cp groups/g${group_number}/${router_name}/init_full_conf.sh ${group_number}_${router_name}router:/home/
+        isula exec -it ${group_number}_${router_name}router ./home/init_full_conf.sh
 
-        docker exec -it ${group_number}_${router_name}host ifconfig ${router_name}router ${group_number}.$((100+$rid)).0.1/24
-        docker exec -it ${group_number}_${router_name}host ip route add default via ${group_number}.$((100+$rid)).0.2
+        isula exec -it ${group_number}_${router_name}host ifconfig ${router_name}router ${group_number}.$((100+$rid)).0.1/24
+        isula exec -it ${group_number}_${router_name}host ip route add default via ${group_number}.$((100+$rid)).0.2
 
         rid=$(($rid+1))
     done

@@ -35,7 +35,7 @@ for ((k=0;k<group_numbers;k++)); do
         n_l2_hosts=${#l2_hosts[@]}
 
         # kill ssh container
-        docker kill "${group_number}""_ssh" &>/dev/nul || true
+        isula kill "${group_number}""_ssh" &>/dev/nul || true
 
         for ((i=0;i<n_routers;i++)); do
             router_i=(${routers[$i]})
@@ -44,11 +44,11 @@ for ((k=0;k<group_numbers;k++)); do
             property2="${router_i[2]}"
 
             # kill router router
-            docker kill "${group_number}""_""${rname}""router" &>/dev/nul || true &
+            isula kill "${group_number}""_""${rname}""router" &>/dev/nul || true &
 
             # kill host or layer 2
             if [ "$(echo ${property2} | sed 's/:.*//g')" == "host" ]; then
-                docker kill "${group_number}""_""${rname}""host" &>/dev/nul || true &
+                isula kill "${group_number}""_""${rname}""host" &>/dev/nul || true &
 
             elif [[ "${property2}" == *L2* ]];then
                 # kill switches
@@ -56,7 +56,7 @@ for ((k=0;k<group_numbers;k++)); do
                     switch_l=(${l2_switches[$l]})
                     l2name="${switch_l[0]}"
                     sname="${switch_l[1]}"
-                    docker kill ${group_number}_L2_${l2name}_${sname} &>/dev/nul || true &
+                    isula kill ${group_number}_L2_${l2name}_${sname} &>/dev/nul || true &
                 done
 
                 # kill hosts
@@ -66,7 +66,7 @@ for ((k=0;k<group_numbers;k++)); do
                     hname="${host_l[0]}"
                     l2name="${host_l[2]}"
 
-                    docker kill ${group_number}_L2_${l2name}_${hname} &>/dev/nul || true &
+                    isula kill ${group_number}_L2_${l2name}_${hname} &>/dev/nul || true &
 
                 done
             fi
@@ -76,15 +76,20 @@ for ((k=0;k<group_numbers;k++)); do
         elif [ "${group_as}" = "IXP" ];then
 
         #kill IXP router
-        docker kill "${group_number}""_IXP" &>/dev/nul || true &
+        isula kill "${group_number}""_IXP" &>/dev/nul || true &
 
     fi
 
 done
 
-docker kill DNS &>/dev/nul || true &
-docker kill MEASUREMENT &>/dev/nul || true &
-docker kill MATRIX &>/dev/nul || true &
+isula kill DNS &>/dev/nul || true &
+isula kill MEASUREMENT &>/dev/nul || true &
+isula kill MATRIX &>/dev/nul || true &
 
 wait
-docker system prune -f
+
+if [ -n "$(isula ps -aq -f status=exited)" ]
+then
+  isula rm -v $(isula ps -aq -f status=exited)
+fi
+

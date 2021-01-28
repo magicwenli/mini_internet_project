@@ -8,7 +8,7 @@
 set -o errexit
 set -o pipefail
 set -o nounset
-
+set -x
 
 DIRECTORY="$1"
 source "${DIRECTORY}"/config/subnet_config.sh
@@ -62,7 +62,7 @@ for ((k=0;k<group_numbers;k++)); do
             sys_id="${switch_l[3]}"
             stp_prio="${switch_l[4]}"
 
-            docker exec -d "${group_number}""_L2_""${l2name}"_${sname} ovs-vsctl \
+            isula exec -d "${group_number}""_L2_""${l2name}"_${sname} ovs-vsctl \
                 -- add-br br0 \
                 -- set bridge br0 stp_enable=true \
                 -- set-fail-mode br0 standalone \
@@ -91,10 +91,10 @@ for ((k=0;k<group_numbers;k++)); do
             "${group_number}"-"${switch2}" "${group_number}""_L2_""${l2name1}"_${switch1} \
             "${group_number}"-"${switch1}" "${group_number}""_L2_""${l2name2}"_${switch2}
 
-            echo "docker exec -d "${group_number}""_L2_""${l2name1}_${switch1}" ovs-vsctl" \
+            echo "isula exec -d "${group_number}""_L2_""${l2name1}_${switch1}" ovs-vsctl" \
                  "add-port br0 "${group_number}"-"${switch2}"" \
                  "-- set Port "${group_number}"-"${switch2}" trunks=0" >> "${DIRECTORY}"/groups/l2_init_switch.sh
-            echo "docker exec -d "${group_number}""_L2_""${l2name2}_${switch2}" ovs-vsctl" \
+            echo "isula exec -d "${group_number}""_L2_""${l2name2}_${switch2}" ovs-vsctl" \
                  "add-port br0 "${group_number}"-"${switch1}"" \
                  "-- set Port "${group_number}"-"${switch1}" trunks=0" >> "${DIRECTORY}"/groups/l2_init_switch.sh
 
@@ -116,7 +116,7 @@ for ((k=0;k<group_numbers;k++)); do
                 echo "create_netns_link" >> "${DIRECTORY}"/groups/add_vpns.sh
                 echo "ip link set ${group_number}-$hname netns \$PID" >> "${DIRECTORY}"/groups/add_vpns.sh
                 echo "ip netns exec \$PID ip link set dev ${group_number}-$hname up" >> "${DIRECTORY}"/groups/add_vpns.sh
-                echo "docker exec -d "${group_number}""_L2_""${l2name}_${sname}" ovs-vsctl add-port br0 ${group_number}-$hname" >> "${DIRECTORY}"/groups/add_vpns.sh
+                echo "isula exec -d "${group_number}""_L2_""${l2name}_${sname}" ovs-vsctl add-port br0 ${group_number}-$hname" >> "${DIRECTORY}"/groups/add_vpns.sh
 
                 echo "ip link set dev g${group_number}_$hname up" >> groups/add_vpns.sh
                 echo "ip link set dev tap_g${group_number}_$hname up" >> groups/add_vpns.sh
@@ -140,7 +140,7 @@ for ((k=0;k<group_numbers;k++)); do
                 ${group_number}-${hname} ${group_number}_L2_${l2name}_${sname} \
                 ${group_number}-${sname} ${group_number}_L2_${l2name}_${hname}
 
-                echo "docker exec -d "${group_number}""_L2_""${l2name}_${sname}" ovs-vsctl add-port br0 "${group_number}"-"${hname}"" >> "${DIRECTORY}"/groups/l2_init_switch.sh
+                echo "isula exec -d "${group_number}""_L2_""${l2name}_${sname}" ovs-vsctl add-port br0 "${group_number}"-"${hname}"" >> "${DIRECTORY}"/groups/l2_init_switch.sh
             fi
         done
 
@@ -169,7 +169,7 @@ for ((k=0;k<group_numbers;k++)); do
                             "${rname}""router" "${group_number}""_L2_""${l2name}_${sname}" \
                             --throughput=10000
 
-                            echo "docker exec -d "${group_number}""_L2_""${l2name}_${sname}" ovs-vsctl add-port br0 "${rname}""router"" >> "${DIRECTORY}"/groups/l2_init_switch.sh
+                            echo "isula exec -d "${group_number}""_L2_""${l2name}_${sname}" ovs-vsctl add-port br0 "${rname}""router"" >> "${DIRECTORY}"/groups/l2_init_switch.sh
                         fi
                     done
             fi

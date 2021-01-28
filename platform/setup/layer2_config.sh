@@ -80,12 +80,12 @@ for ((k=0;k<group_numbers;k++)); do
                             ip link add link ${rname}-L2 name ${rname}-L2.$vlan type vlan id $vlan
 
                         if [ "$group_config" == "Config" ]; then
-                            docker exec -d ${group_number}_${rname}router \
+                            isula exec -d ${group_number}_${rname}router \
                                 vtysh -c 'conf t' -c 'interface '${rname}'-L2.'$vlan -c 'ip address '$subnet_router
                         fi
                     else
                         if [ "$group_config" == "Config" ]; then
-                            docker exec -d ${group_number}_${rname}router \
+                            isula exec -d ${group_number}_${rname}router \
                                 vtysh -c 'conf t' -c 'interface '${rname}'-L2' -c 'ip address '$subnet_router
                         fi
                     fi
@@ -106,7 +106,7 @@ for ((k=0;k<group_numbers;k++)); do
             vlan="${host_l[6]}"
 
             if [ "$group_config" == "Config" ] && [ "$vlan" != "0" ]; then
-                docker exec -d "${group_number}""_L2_""${l2name}_${sname}" \
+                isula exec -d "${group_number}""_L2_""${l2name}_${sname}" \
                     ovs-vsctl set port ${group_number}-$hname tag=$vlan
             fi
 
@@ -148,10 +148,10 @@ for ((k=0;k<group_numbers;k++)); do
             delay="${row_l[5]}"
 
             if [ "$group_config" == "Config" ]; then
-                docker exec -d "${group_number}""_L2_""${l2name1}_${switch1}" \
+                isula exec -d "${group_number}""_L2_""${l2name1}_${switch1}" \
                     ovs-vsctl set port ${group_number}-${switch2} trunks=${trunk_string::-1}
 
-                docker exec -d "${group_number}""_L2_""${l2name2}_${switch2}" \
+                isula exec -d "${group_number}""_L2_""${l2name2}_${switch2}" \
                     ovs-vsctl set port ${group_number}-${switch1} trunks=${trunk_string::-1}
             fi
         done
@@ -166,7 +166,7 @@ for ((k=0;k<group_numbers;k++)); do
 
             if [ "$group_config" == "Config" ]; then
                 if [[ $connected != "N/A" ]]; then
-                    docker exec -d "${group_number}""_L2_""${l2name}_${sname}" \
+                    isula exec -d "${group_number}""_L2_""${l2name}_${sname}" \
                         ovs-vsctl set port ${connected}router trunks=${trunk_string::-1}
                 fi
             fi

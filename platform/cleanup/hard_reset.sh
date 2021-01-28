@@ -3,14 +3,19 @@
 # remove all container, bridges and temporary files
 
 # kill all container
-for container in `docker ps -q`; do
-  docker kill "${container}" >/dev/nul &
+for container in `isula ps -q`; do
+  isula kill "${container}" >/dev/nul &
 done
 wait
 
 # remove all container & restart docker
-docker system prune -f
-service docker restart
+
+if [ -n "$(isula ps -aq -f status=exited)" ]
+then
+  isula rm -v $(isula ps -aq -f status=exited)
+fi
+
+service isula restart
 
 # remove all ovs-bridges
 if [ "$(ovs-vsctl list-br | wc -l )" != "0" ];then

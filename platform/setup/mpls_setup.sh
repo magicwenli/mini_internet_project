@@ -38,8 +38,8 @@ for ((k=0;k<group_numbers;k++)); do
             throughput_array_index=$((group_number%${#throughput_array[@]}))
             throughput="${throughput_array[$throughput_array_index]}"
 
-            docker exec -d ${group_number}_${router1}router sysctl -w net.mpls.conf."port_${router2}".input=1
-            docker exec -d ${group_number}_${router2}router sysctl -w net.mpls.conf."port_${router1}".input=1
+            isula exec -d ${group_number}_${router1}router sysctl -w net.mpls.conf."port_${router2}".input=1
+            isula exec -d ${group_number}_${router2}router sysctl -w net.mpls.conf."port_${router1}".input=1
         done
     fi
 done

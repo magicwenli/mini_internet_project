@@ -13,7 +13,10 @@ DIRECTORY="$1"
 ./cleanup/container_cleanup.sh "${DIRECTORY}"
 
 # remove all container & restart docker
-docker system prune -f
+if [ -n "$(isula ps -aq -f status=exited)" ]
+then
+  isula rm -v $(isula ps -aq -f status=exited)
+fi
 
 echo -n "ovs-vsctl " > ovs_command.txt
 

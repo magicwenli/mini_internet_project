@@ -71,7 +71,7 @@ get_docker_pid() {
         DOCKER_PID="${DOCKER_TO_PID[$1]}"
     else
         echo >&2 "WARNING: get_docker_pid $1 not found in cache"
-        if DOCKER_PID=`docker inspect -f '{{.State.Pid}}' "$1"`; then :; else
+        if DOCKER_PID=`isula inspect -f '{{.State.Pid}}' "$1"`; then :; else
            echo >&2 "$UTIL: Failed to get the PID of the container"
            exit 1
         fi
@@ -163,7 +163,7 @@ add_port () {
     echo "ip netns exec "\$PID" ip link set dev "${PORTNAME}_c" name "$INTERFACE"" >> groups/ip_setup.sh
     echo "ip netns exec "\$PID" ip link set "$INTERFACE" up" >> groups/ip_setup.sh
 
-    echo "  PID=\$(docker inspect -f '{{.State.Pid}}' "$CONTAINER")">> groups/restart_container.sh
+    echo "  PID=\$(isula inspect -f '{{.State.Pid}}' "$CONTAINER")">> groups/restart_container.sh
     echo "  create_netns_link" >> groups/restart_container.sh
     echo "  ip link set "${PORTNAME}_c" netns "\$PID"" >> groups/restart_container.sh
     echo "  ip netns exec "\$PID" ip link set dev "${PORTNAME}_c" name "$INTERFACE"" >> groups/restart_container.sh

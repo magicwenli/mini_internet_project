@@ -9,7 +9,7 @@ PORTNAME="nat_port"
 sudo ip link add "${PORTNAME}_l" type veth peer name "${PORTNAME}_c"
 sudo ip link set "${PORTNAME}_l" up
 
-PID=$(sudo docker inspect -f '{{.State.Pid}}' 1_FRANrouter)
+PID=$(sudo isula inspect -f '{{.State.Pid}}' 1_FRANrouter)
 sudo ip link set "${PORTNAME}_c" netns $PID
 sudo ip netns exec $PID ip link set dev "${PORTNAME}_c" name nat
 sudo ip netns exec $PID ip link set nat up

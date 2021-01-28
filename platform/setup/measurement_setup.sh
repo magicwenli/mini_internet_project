@@ -35,21 +35,21 @@ else
 
     # start measurement container
     subnet_dns="$(subnet_router_DNS -1 "dns")"
-    docker run -itd --net='none' --dns="${subnet_dns%/*}" \
+    isula run -itd --net='none' --dns="${subnet_dns%/*}" \
         --sysctl net.ipv4.icmp_ratelimit=0 \
-        --name="MEASUREMENT" --cpus=2 --pids-limit 100 \
+        --name="MEASUREMENT"  --pids-limit 100 \
         -v /etc/timezone:/etc/timezone:ro \
         -v /etc/localtime:/etc/localtime:ro \
         --cap-add=NET_ADMIN thomahol/d_measurement
 
     # cache the docker pid for ovs-docker.sh
     source ${DIRECTORY}/groups/docker_pid.map
-    DOCKER_TO_PID['MEASUREMENT']=$(docker inspect -f '{{.State.Pid}}' MEASUREMENT)
+    DOCKER_TO_PID['MEASUREMENT']=$(isula inspect -f '{{.State.Pid}}' MEASUREMENT)
     declare -p DOCKER_TO_PID > ${DIRECTORY}/groups/docker_pid.map
 
     passwd="$(openssl rand -hex 8)"
     echo "${passwd}" >> "${DIRECTORY}"/groups/ssh_measurement.txt
-    echo -e ""${passwd}"\n"${passwd}"" | docker exec -i MEASUREMENT passwd root
+    echo -e ""${passwd}"\n"${passwd}"" | isula exec -i MEASUREMENT passwd root
 
     subnet_ssh_measurement="$(subnet_ext_sshContainer -1 "MEASUREMENT")"
     ./setup/ovs-docker.sh add-port ssh_to_group ssh_in MEASUREMENT --ipaddress="${subnet_ssh_measurement}"

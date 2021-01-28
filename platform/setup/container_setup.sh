@@ -5,6 +5,7 @@
 set -o errexit
 set -o pipefail
 set -o nounset
+set -x
 
 DIRECTORY="$1"
 source "${DIRECTORY}"/config/subnet_config.sh
@@ -41,8 +42,8 @@ for ((k=0;k<group_numbers;k++)); do
         subnet_dns="$(subnet_router_DNS "${group_number}" "dns")"
 
         # start ssh container
-        docker run -itd --net='none'  --name="${group_number}""_ssh" \
-            --cpus=2 --pids-limit 100 --hostname="g${group_number}-proxy" --cap-add=NET_ADMIN \
+        isula run -itd --net='none'  --name="${group_number}""_ssh" \
+             --pids-limit 100 --hostname="g${group_number}-proxy" --cap-add=NET_ADMIN \
             -v "${location}"/goto.sh:/root/goto.sh  \
             -v "${location}"/save_configs.sh:/root/save_configs.sh \
             -v /etc/timezone:/etc/timezone:ro \
@@ -59,8 +60,8 @@ for ((k=0;k<group_numbers;k++)); do
             l2name="${switch_l[0]}"
             sname="${switch_l[1]}"
 
-            docker run -itd --net='none' --dns="${subnet_dns%/*}" --cap-add=NET_ADMIN \
-                --cpus=2 --pids-limit 100 --hostname "${sname}" \
+            isula run -itd --net='none' --dns="${subnet_dns%/*}" --cap-add=NET_ADMIN \
+                 --pids-limit 100 --hostname "${sname}" \
                 --name=${group_number}_L2_${l2name}_${sname} \
                 --sysctl net.ipv4.ip_forward=1 \
                 --sysctl net.ipv4.icmp_ratelimit=0 \
@@ -84,8 +85,8 @@ for ((k=0;k<group_numbers;k++)); do
             sname="${host_l[3]}"
 
             if [[ $hname != vpn* ]]; then
-                docker run -itd --net='none' --dns="${subnet_dns%/*}" --cap-add=NET_ADMIN \
-                    --cpus=2 --pids-limit 100 --hostname "${hname}" \
+                isula run -itd --net='none' --dns="${subnet_dns%/*}" --cap-add=NET_ADMIN \
+                     --pids-limit 100 --hostname "${hname}" \
                     --name="${group_number}""_L2_""${l2name}""_""${hname}" \
                     --sysctl net.ipv4.icmp_ratelimit=0 \
                     --sysctl net.ipv4.icmp_echo_ignore_broadcasts=0 \
@@ -107,7 +108,7 @@ for ((k=0;k<group_numbers;k++)); do
             location="${DIRECTORY}"/groups/g"${group_number}"/"${rname}"
 
             # start router
-            docker run -itd --net='none'  --dns="${subnet_dns%/*}" \
+            isula run -itd --net='none'  --dns="${subnet_dns%/*}" \
                 --name="${group_number}""_""${rname}""router" \
                 --sysctl net.ipv4.ip_forward=1 \
                 --sysctl net.ipv4.icmp_ratelimit=0 \
@@ -120,7 +121,7 @@ for ((k=0;k<group_numbers;k++)); do
                 --sysctl net.mpls.platform_labels=1048575 \
                 --sysctl net.ipv4.tcp_l3mdev_accept=1 \
                 --privileged \
-                --cpus=2 --pids-limit 100 --hostname "${rname}""_router" \
+                 --pids-limit 100 --hostname "${rname}""-router" \
                 -v "${location}"/looking_glass.txt:/home/looking_glass.txt \
                 -v "${location}"/daemons:/etc/frr/daemons \
                 -v "${location}"/frr.conf:/etc/frr/frr.conf \
@@ -131,9 +132,9 @@ for ((k=0;k<group_numbers;k++)); do
 
             # start host
             if [[ "${property2}" == host* ]];then
-                docker run -itd --net='none' --dns="${subnet_dns%/*}"  \
+                isula run -itd --net='none' --dns="${subnet_dns%/*}"  \
                     --name="${group_number}""_""${rname}""host" --cap-add=NET_ADMIN \
-                    --cpus=2 --pids-limit 100 --hostname "${rname}""_host" \
+                     --pids-limit 100 --hostname "${rname}""-host" \
                     --sysctl net.ipv4.icmp_ratelimit=0 \
                     --sysctl net.ipv4.icmp_echo_ignore_broadcasts=0 \
                     -v /etc/timezone:/etc/timezone:ro \
@@ -147,8 +148,8 @@ for ((k=0;k<group_numbers;k++)); do
     elif [ "${group_as}" = "IXP" ];then
 
         location="${DIRECTORY}"/groups/g"${group_number}"
-        docker run -itd --net='none' --name="${group_number}""_IXP" \
-            --pids-limit 100 --hostname "${group_number}""_IXP" \
+        isula run -itd --net='none' --name="${group_number}""_IXP" \
+            --pids-limit 100 --hostname "${group_number}""-IXP" \
             -v "${location}"/daemons:/etc/quagga/daemons \
             --privileged \
             --sysctl net.ipv4.ip_forward=1 \
@@ -166,9 +167,9 @@ for ((k=0;k<group_numbers;k++)); do
     fi
 done
 
-# Cache the docker pid to avoid calling docker inspect multiple times
+# Cache the docker pid to avoid calling isula inspect multiple times
 # Access via setup/ovs-docker.sh get_docker_pid
-readarray -t PIDS <<< $(docker inspect -f '{{.State.Pid}}' "${CONTAINERS[@]}")
+readarray -t PIDS <<< $(isula inspect -f '{{.State.Pid}}' "${CONTAINERS[@]}")
 declare -A DOCKER_TO_PID
 for ((i=0;i<${#CONTAINERS[@]};++i)); do
     if [[ $(lsb_release -rs) == 16* ]]; then

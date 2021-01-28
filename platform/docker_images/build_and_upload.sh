@@ -6,20 +6,20 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-docker build --tag=d_router docker_images/router/
-docker build --tag=d_ixp docker_images/ixp/
-docker build --tag=d_host docker_images/host/
-docker build --tag=d_ssh docker_images/ssh/
-docker build --tag=d_measurement docker_images/measurement/
-docker build --tag=d_dns docker_images/dns/
-docker build --tag=d_switch docker_images/switch/
-docker build --tag=d_matrix docker_images/matrix/
-docker build --tag=d_vpn docker_images/vpn/
-docker build --tag=d_vlc docker_images/vlc/
-docker build --tag=d_hostm docker_images/hostm/
+isula-build --tag=d_router docker_images/router/
+isula-build --tag=d_ixp docker_images/ixp/
+isula-build --tag=d_host docker_images/host/
+isula-build --tag=d_ssh docker_images/ssh/
+isula-build --tag=d_measurement docker_images/measurement/
+isula-build --tag=d_dns docker_images/dns/
+isula-build --tag=d_switch docker_images/switch/
+isula-build --tag=d_matrix docker_images/matrix/
+isula-build --tag=d_vpn docker_images/vpn/
+isula-build --tag=d_vlc docker_images/vlc/
+isula-build --tag=d_hostm docker_images/hostm/
 
 
-docker login
+isula login
 
 # If you want to use your custom docker containers and upload them into
 # docker hub, change the docker username with your own docker username.

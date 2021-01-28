@@ -194,7 +194,7 @@ for ((k=0;k<group_numbers;k++));do
             	echo " -c 'neighbor "${subnet1%/*}" route-map "${grp_1}"_EXPORT export' \\" >> "${location}"
             	echo " -c 'exit' \\" >> "${location}"
 
-                docker exec -d "${group_number}"_IXP bash -c "ovs-vsctl add-port IXP grp_${grp_1}"
+                isula exec -d "${group_number}"_IXP bash -c "ovs-vsctl add-port IXP grp_${grp_1}"
             fi
         done
 
@@ -513,21 +513,21 @@ for ((k=0;k<group_numbers;k++)); do
             #run initial config
             echo " -c 'exit' -c 'write' " >> "${DIRECTORY}"/groups/g"${group_number}"/"${rname}"/init_full_conf.sh
 
-            docker cp "${DIRECTORY}"/groups/g"${group_number}"/"${rname}"/init_conf.sh "${group_number}"_"${rname}"router:/home/init_conf.sh
-            docker exec -d "${group_number}"_"${rname}"router bash ./home/init_conf.sh &
+            isula cp "${DIRECTORY}"/groups/g"${group_number}"/"${rname}"/init_conf.sh "${group_number}"_"${rname}"router:/home/init_conf.sh
+            isula exec -d "${group_number}"_"${rname}"router bash ./home/init_conf.sh &
 
             if [ "$group_config" == "Config" ]; then
-                docker cp "${DIRECTORY}"/groups/g"${group_number}"/"${rname}"/init_full_conf.sh "${group_number}"_"${rname}"router:/home/init_full_conf.sh
-                docker exec -d "${group_number}"_"${rname}"router bash ./home/init_full_conf.sh &
+                isula cp "${DIRECTORY}"/groups/g"${group_number}"/"${rname}"/init_full_conf.sh "${group_number}"_"${rname}"router:/home/init_full_conf.sh
+                isula exec -d "${group_number}"_"${rname}"router bash ./home/init_full_conf.sh &
             fi
 
         done
     else
         echo " -c 'exit' -c 'write' " >> "${DIRECTORY}"/groups/g"${group_number}"/init_full_conf.sh
-        docker cp "${DIRECTORY}"/groups/g"${group_number}"/init_full_conf.sh "${group_number}"_IXP:/init_full_conf.sh
-        docker exec -d "${group_number}"_IXP bash ./init_full_conf.sh &
+        isula cp "${DIRECTORY}"/groups/g"${group_number}"/init_full_conf.sh "${group_number}"_IXP:/init_full_conf.sh
+        isula exec -d "${group_number}"_IXP bash ./init_full_conf.sh &
 
-        docker exec -d "${group_number}"_IXP bash -c "ifconfig IXP 180.${group_number}.0.${group_number}/24"
+        isula exec -d "${group_number}"_IXP bash -c "ifconfig IXP 180.${group_number}.0.${group_number}/24"
     fi
 done
 

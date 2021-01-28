@@ -19,14 +19,14 @@ To run all the different components in the mini-Internet (hosts, switches, route
 Follow this [installation guide](https://docs.docker.com/install/linux/docker-ce/ubuntu/) to install docker.
 In the directory `docker_images` you can find all the Dockerfile and docker-start files used to build the containers.
 In case you want to add some functionalities into some of the docker containers, you can
-update these files and build you own docker images:
+update these files and build you own isula images:
 
 ```
-docker build --tag=your_tag your_dir/
+isula-build --tag=your_tag your_dir/
 ```
 
 Then, you have to manually update the scripts in the `setup` directory and run
-your custom docker images instead of the ones we provide by default.
+your custom isula images instead of the ones we provide by default.
 
 
 #### Install Open vSwitch
@@ -167,15 +167,15 @@ You can access the mini-Internet in three ways.
 
 #### Instructor access using docker
 
-If you are the instructor and have access to the server hosting the mini-Internet, you can directly access the containers using the various docker commands. First, type `sudo docker ps` to get a list of all the containers running. The names of the hosts, switches and routers always follow the same convention. For instance, to access a shell of the LOND router in AS1, just use the following command:
+If you are the instructor and have access to the server hosting the mini-Internet, you can directly access the containers using the various docker commands. First, type `sudo isula ps` to get a list of all the containers running. The names of the hosts, switches and routers always follow the same convention. For instance, to access a shell of the LOND router in AS1, just use the following command:
 
-`sudo docker exec -it 1_LONDrouter bash`
+`sudo isula exec -it 1_LONDrouter bash`
 
 If you are in the router container, run `vtysh` to access the CLI of that router.
 The following example shows 
 you how to access the switch EPFL in the L2 network UNIV of AS3:
 
-`sudo docker exec -it 3_L2_UNIV_EPFL bash`
+`sudo isula exec -it 3_L2_UNIV_EPFL bash`
 
 Hosts and switches do not have a CLI, so once you are in the container, you can start configuring them. 
 
@@ -281,7 +281,7 @@ The following section explains how we build and use the different monitoring too
 #### Looking glass
 
 Every container which runs a router pulls the routing table from the FRRouting CLI every 30 seconds and stores it in `/home/looking_glass.txt`.
-You can then simply periodically copy this file from the container (e.g., using `docker cp 1_PARIrouter:/home/looking_glass.txt .`) and make it available to the students for example over a web interface.
+You can then simply periodically copy this file from the container (e.g., using `isula cp 1_PARIrouter:/home/looking_glass.txt .`) and make it available to the students for example over a web interface.
 
 #### Active probing
 
@@ -314,7 +314,7 @@ Another container called `MATRIX` is also connected to every AS. By looking at t
 Only the instructor can access the MATRIX container, from the server with:
 
 ```
-sudo docker exec -it MATRIX bash
+sudo isula exec -it MATRIX bash
 ```
 
 To generate the connectivity matrix, just run the following script (we recommend to run it from a tmux session so that it never stops):
@@ -354,8 +354,8 @@ It can happen that a container crashes while the mini-Internet is running. For i
 For instance if the container CONTAINER_NAME has crashed or has a problem, just run the following commands:
 
 ```
-docker kill CONTAINER_NAME
-docker start CONTAINER_NAME
+isula kill CONTAINER_NAME
+isula start CONTAINER_NAME
 ./groups/restart_container.sh CONTAINER_NAME
 ```
 
