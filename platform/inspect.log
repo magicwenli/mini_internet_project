@@ -1,0 +1,190 @@
+[
+    {
+        "Id": "1c391f9fd4d022223b583b67d4506bd7dda9699f9d1c390eabc2aa7fd8ee9061",
+        "Created": "2021-01-27T21:56:27.017256576+08:00",
+        "Path": "/usr/sbin/docker-start",
+        "Args": [],
+        "State": {
+            "Status": "exited",
+            "Running": false,
+            "Paused": false,
+            "Restarting": false,
+            "Pid": 0,
+            "ExitCode": 125,
+            "Error": "Start container error: runtime error: 1c391f9fd4d022223b583b67d4506bd7dda9699f9d1c390eabc2aa7fd8ee9061:tools/lxc_start.c:main:404 starting container process caused \"conf.c:2676: failed to mount /etc/timezone as type bind.Failed to setup lxc, please check the config file.\"",
+            "StartedAt": "0001-01-01T00:00:00Z",
+            "FinishedAt": "2021-01-27T21:56:27.221991357+08:00",
+            "Health": {
+                "Status": "",
+                "FailingStreak": 0,
+                "Log": []
+            }
+        },
+        "Image": "sha256:b4a8ee2b606cac70637c7cf898fd6a0e43ff92c7760f3d24d033b74c6200423a",
+        "ResolvConfPath": "/var/lib/isulad/engines/lcr/1c391f9fd4d022223b583b67d4506bd7dda9699f9d1c390eabc2aa7fd8ee9061/resolv.conf",
+        "HostnamePath": "",
+        "HostsPath": "/var/lib/isulad/engines/lcr/1c391f9fd4d022223b583b67d4506bd7dda9699f9d1c390eabc2aa7fd8ee9061/hosts",
+        "LogPath": "/var/lib/isulad/engines/lcr/1c391f9fd4d022223b583b67d4506bd7dda9699f9d1c390eabc2aa7fd8ee9061/console.log",
+        "Name": "1_ssh",
+        "RestartCount": 0,
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "SeccompProfile": "",
+        "NoNewPrivileges": false,
+        "HostConfig": {
+            "Binds": [
+                "/root/mini_internet_project/platform/groups/g1/goto.sh:/root/goto.sh",
+                "/root/mini_internet_project/platform/groups/g1/save_configs.sh:/root/save_configs.sh",
+                "/etc/timezone:/etc/timezone:ro",
+                "/etc/localtime:/etc/localtime:ro",
+                "/root/mini_internet_project/platform/config/welcoming_message.txt:/etc/motd:ro"
+            ],
+            "NetworkMode": "none",
+            "GroupAdd": [],
+            "IpcMode": "",
+            "PidMode": "",
+            "Privileged": false,
+            "SystemContainer": false,
+            "NsChangeFiles": [],
+            "UserRemap": "",
+            "ShmSize": 67108864,
+            "AutoRemove": false,
+            "AutoRemoveBak": false,
+            "ReadonlyRootfs": false,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "Sysctls": {},
+            "Runtime": "lcr",
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "CapAdd": [
+                "NET_ADMIN"
+            ],
+            "CapDrop": [],
+            "Dns": [],
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": [],
+            "HookSpec": "",
+            "CPUShares": 0,
+            "Memory": 0,
+            "OomScoreAdj": 0,
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": [],
+            "BlkioDeviceReadBps": [],
+            "BlkioDeviceWriteBps": [],
+            "CPUPeriod": 0,
+            "CPUQuota": 0,
+            "CPURealtimePeriod": 0,
+            "CPURealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "SecurityOpt": [],
+            "StorageOpt": {},
+            "KernelMemory": 0,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "OomKillDisable": false,
+            "PidsLimit": 100,
+            "FilesLimit": 0,
+            "Ulimits": [],
+            "Hugetlbs": [],
+            "HostChannel": {
+                "PathOnHost": "",
+                "PathInContainer": "",
+                "Permissions": "",
+                "Size": 0
+            },
+            "EnvTargetFile": "",
+            "ExternalRootfs": "",
+            "CgroupParent": ""
+        },
+        "Mounts": [
+            {
+                "Name": "",
+                "Source": "/root/mini_internet_project/platform/groups/g1/goto.sh",
+                "Destination": "/root/goto.sh",
+                "Driver": "",
+                "Mode": "rw,rprivate",
+                "RW": true,
+                "Propagation": "rprivate"
+            },
+            {
+                "Name": "",
+                "Source": "/root/mini_internet_project/platform/groups/g1/save_configs.sh",
+                "Destination": "/root/save_configs.sh",
+                "Driver": "",
+                "Mode": "rw,rprivate",
+                "RW": true,
+                "Propagation": "rprivate"
+            },
+            {
+                "Name": "",
+                "Source": "/etc/timezone",
+                "Destination": "/etc/timezone",
+                "Driver": "",
+                "Mode": "ro,rprivate",
+                "RW": false,
+                "Propagation": "rprivate"
+            },
+            {
+                "Name": "",
+                "Source": "/etc/localtime",
+                "Destination": "/etc/localtime",
+                "Driver": "",
+                "Mode": "ro,rprivate",
+                "RW": false,
+                "Propagation": "rprivate"
+            },
+            {
+                "Name": "",
+                "Source": "/root/mini_internet_project/platform/config/welcoming_message.txt",
+                "Destination": "/etc/motd",
+                "Driver": "",
+                "Mode": "ro,rprivate",
+                "RW": false,
+                "Propagation": "rprivate"
+            }
+        ],
+        "Config": {
+            "Hostname": "g1-proxy",
+            "User": "",
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "LANG=en_US.UTF-8",
+                "LANGUAGE=en_US:en",
+                "LC_ALL=en_US.UTF-8"
+            ],
+            "Tty": true,
+            "Cmd": [],
+            "Entrypoint": [
+                "/usr/sbin/docker-start"
+            ],
+            "Labels": {},
+            "Annotations": {
+                "host.network.mode": "none",
+                "cgroup.dir": "/isulad",
+                "log.console.file": "/var/lib/isulad/engines/lcr/1c391f9fd4d022223b583b67d4506bd7dda9699f9d1c390eabc2aa7fd8ee9061/console.log",
+                "log.console.filerotate": "7",
+                "log.console.filesize": "30KB",
+                "rootfs.mount": "/var/lib/isulad/mnt/rootfs",
+                "native.umask": "secure"
+            },
+            "HealthCheck": {
+                "Test": [],
+                "Interval": 0,
+                "Timeout": 0,
+                "StartPeriod": 0,
+                "Retries": 0,
+                "ExitOnUnhealthy": false
+            },
+            "Image": "thomahol/d_ssh"
+        },
+        "NetworkSettings": {
+            "IPAddress": ""
+        }
+    }
+]

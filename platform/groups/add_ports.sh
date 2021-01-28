@@ -1,0 +1,245 @@
+#!/bin/bash
+ovs-vsctl -- add-port 1-host 9a887e0093b95_l \
+-- set interface 9a887e0093b95_l external_ids:container_id=1_LONDrouter external_ids:container_iface=host \
+-- add-port 1-host 9bd35019028f5_l \
+-- set interface 9bd35019028f5_l external_ids:container_id=1_LONDhost external_ids:container_iface=LONDrouter \
+-- add-port 1-host 0005f2de67955_l \
+-- set interface 0005f2de67955_l external_ids:container_id=1_PARIrouter external_ids:container_iface=host \
+-- add-port 1-host 54b6a831cfa55_l \
+-- set interface 54b6a831cfa55_l external_ids:container_id=1_PARIhost external_ids:container_iface=PARIrouter \
+-- add-port 1-host 4fa7fc9cc7305_l \
+-- set interface 4fa7fc9cc7305_l external_ids:container_id=1_NEWYrouter external_ids:container_iface=host \
+-- add-port 1-host 313b353cf6655_l \
+-- set interface 313b353cf6655_l external_ids:container_id=1_NEWYhost external_ids:container_iface=NEWYrouter \
+-- add-port 1-host 88b8cde13aba5_l \
+-- set interface 88b8cde13aba5_l external_ids:container_id=1_BOSTrouter external_ids:container_iface=host \
+-- add-port 1-host c16801781d145_l \
+-- set interface c16801781d145_l external_ids:container_id=1_BOSThost external_ids:container_iface=BOSTrouter \
+-- add-port 1-host cbfcd102f9fe5_l \
+-- set interface cbfcd102f9fe5_l external_ids:container_id=1_ATLArouter external_ids:container_iface=host \
+-- add-port 1-host 800f8a801e9c5_l \
+-- set interface 800f8a801e9c5_l external_ids:container_id=1_ATLAhost external_ids:container_iface=ATLArouter \
+-- add-port 1-host d49c4f81576e5_l \
+-- set interface d49c4f81576e5_l external_ids:container_id=1_MIAMrouter external_ids:container_iface=host \
+-- add-port 1-host bd5ae80001a35_l \
+-- set interface bd5ae80001a35_l external_ids:container_id=1_MIAMhost external_ids:container_iface=MIAMrouter \
+-- add-port 2-host 4e1af881c9005_l \
+-- set interface 4e1af881c9005_l external_ids:container_id=2_LONDrouter external_ids:container_iface=host \
+-- add-port 2-host 990435db36665_l \
+-- set interface 990435db36665_l external_ids:container_id=2_LONDhost external_ids:container_iface=LONDrouter \
+-- add-port 2-host e57d011e884e5_l \
+-- set interface e57d011e884e5_l external_ids:container_id=2_PARIrouter external_ids:container_iface=host \
+-- add-port 2-host c0230f07bdbe5_l \
+-- set interface c0230f07bdbe5_l external_ids:container_id=2_PARIhost external_ids:container_iface=PARIrouter \
+-- add-port 2-host d7d5c5533f795_l \
+-- set interface d7d5c5533f795_l external_ids:container_id=2_NEWYrouter external_ids:container_iface=host \
+-- add-port 2-host c8edf20588995_l \
+-- set interface c8edf20588995_l external_ids:container_id=2_NEWYhost external_ids:container_iface=NEWYrouter \
+-- add-port 2-host 44462c0ac1645_l \
+-- set interface 44462c0ac1645_l external_ids:container_id=2_BOSTrouter external_ids:container_iface=host \
+-- add-port 2-host a36638d2aff05_l \
+-- set interface a36638d2aff05_l external_ids:container_id=2_BOSThost external_ids:container_iface=BOSTrouter \
+-- add-port 2-host 965ee8f95af15_l \
+-- set interface 965ee8f95af15_l external_ids:container_id=2_ATLArouter external_ids:container_iface=host \
+-- add-port 2-host f2f93280613b5_l \
+-- set interface f2f93280613b5_l external_ids:container_id=2_ATLAhost external_ids:container_iface=ATLArouter \
+-- add-port 2-host 1e8bee111bba5_l \
+-- set interface 1e8bee111bba5_l external_ids:container_id=2_MIAMrouter external_ids:container_iface=host \
+-- add-port 2-host b0e88b477aae5_l \
+-- set interface b0e88b477aae5_l external_ids:container_id=2_MIAMhost external_ids:container_iface=MIAMrouter \
+-- add-port l2-1 8b47f22f749e5_l \
+-- set interface 8b47f22f749e5_l external_ids:container_id=1_L2_UNIV_ETHZ external_ids:container_iface=1-CERN \
+-- add-port l2-1 34747abce97c5_l \
+-- set interface 34747abce97c5_l external_ids:container_id=1_L2_UNIV_CERN external_ids:container_iface=1-ETHZ \
+-- add-port l2-1 b4669d5438e45_l \
+-- set interface b4669d5438e45_l external_ids:container_id=1_L2_UNIV_ETHZ external_ids:container_iface=1-EPFL \
+-- add-port l2-1 c573b88be4855_l \
+-- set interface c573b88be4855_l external_ids:container_id=1_L2_UNIV_EPFL external_ids:container_iface=1-ETHZ \
+-- add-port l2-1 9dfea811e72a5_l \
+-- set interface 9dfea811e72a5_l external_ids:container_id=1_L2_UNIV_CERN external_ids:container_iface=1-EPFL \
+-- add-port l2-1 1f336da0e4e95_l \
+-- set interface 1f336da0e4e95_l external_ids:container_id=1_L2_UNIV_EPFL external_ids:container_iface=1-CERN \
+-- add-port l2-1 678412fc9c435_l \
+-- set interface 678412fc9c435_l external_ids:container_id=1_L2_UNIV_CERN external_ids:container_iface=1-student-1 \
+-- add-port l2-1 cd24433aea185_l \
+-- set interface cd24433aea185_l external_ids:container_id=1_L2_UNIV_student-1 external_ids:container_iface=1-CERN \
+-- add-port l2-1 54e1a20a25295_l \
+-- set interface 54e1a20a25295_l external_ids:container_id=1_L2_UNIV_CERN external_ids:container_iface=1-staff-1 \
+-- add-port l2-1 f034ca4802985_l \
+-- set interface f034ca4802985_l external_ids:container_id=1_L2_UNIV_staff-1 external_ids:container_iface=1-CERN \
+-- add-port l2-1 7d4d0b12ef895_l \
+-- set interface 7d4d0b12ef895_l external_ids:container_id=1_L2_UNIV_ETHZ external_ids:container_iface=1-student-2 \
+-- add-port l2-1 54cd9a328f405_l \
+-- set interface 54cd9a328f405_l external_ids:container_id=1_L2_UNIV_student-2 external_ids:container_iface=1-ETHZ \
+-- add-port l2-1 e4f4630af3725_l \
+-- set interface e4f4630af3725_l external_ids:container_id=1_L2_UNIV_ETHZ external_ids:container_iface=1-staff-2 \
+-- add-port l2-1 90251347b18b5_l \
+-- set interface 90251347b18b5_l external_ids:container_id=1_L2_UNIV_staff-2 external_ids:container_iface=1-ETHZ \
+-- add-port l2-1 403bd02b92005_l \
+-- set interface 403bd02b92005_l external_ids:container_id=1_L2_UNIV_EPFL external_ids:container_iface=1-student-3 \
+-- add-port l2-1 392c9e7407f85_l \
+-- set interface 392c9e7407f85_l external_ids:container_id=1_L2_UNIV_student-3 external_ids:container_iface=1-EPFL \
+-- add-port l2-1 9106141effe15_l \
+-- set interface 9106141effe15_l external_ids:container_id=1_L2_UNIV_EPFL external_ids:container_iface=1-staff-3 \
+-- add-port l2-1 ebff9b083bbd5_l \
+-- set interface ebff9b083bbd5_l external_ids:container_id=1_L2_UNIV_staff-3 external_ids:container_iface=1-EPFL \
+-- add-port l2-1 ee88ffbd51e55_l \
+-- set interface ee88ffbd51e55_l external_ids:container_id=1_ZURIrouter external_ids:container_iface=ZURI-L2 \
+-- add-port l2-1 c809849a08c95_l \
+-- set interface c809849a08c95_l external_ids:container_id=1_L2_UNIV_ETHZ external_ids:container_iface=ZURIrouter \
+-- add-port l2-1 b9fa783cb3e55_l \
+-- set interface b9fa783cb3e55_l external_ids:container_id=1_GENErouter external_ids:container_iface=GENE-L2 \
+-- add-port l2-1 c86b623846965_l \
+-- set interface c86b623846965_l external_ids:container_id=1_L2_UNIV_CERN external_ids:container_iface=GENErouter \
+-- add-port l2-2 cc21683f7e265_l \
+-- set interface cc21683f7e265_l external_ids:container_id=2_L2_UNIV_ETHZ external_ids:container_iface=2-CERN \
+-- add-port l2-2 c1b2bc185ac15_l \
+-- set interface c1b2bc185ac15_l external_ids:container_id=2_L2_UNIV_CERN external_ids:container_iface=2-ETHZ \
+-- add-port l2-2 3fca714f72cf5_l \
+-- set interface 3fca714f72cf5_l external_ids:container_id=2_L2_UNIV_ETHZ external_ids:container_iface=2-EPFL \
+-- add-port l2-2 e1837048f81f5_l \
+-- set interface e1837048f81f5_l external_ids:container_id=2_L2_UNIV_EPFL external_ids:container_iface=2-ETHZ \
+-- add-port l2-2 e882d64b2a6e5_l \
+-- set interface e882d64b2a6e5_l external_ids:container_id=2_L2_UNIV_CERN external_ids:container_iface=2-EPFL \
+-- add-port l2-2 815c35d2df415_l \
+-- set interface 815c35d2df415_l external_ids:container_id=2_L2_UNIV_EPFL external_ids:container_iface=2-CERN \
+-- add-port l2-2 112b35cd3c3a5_l \
+-- set interface 112b35cd3c3a5_l external_ids:container_id=2_L2_UNIV_CERN external_ids:container_iface=2-student-1 \
+-- add-port l2-2 3fa562e686e45_l \
+-- set interface 3fa562e686e45_l external_ids:container_id=2_L2_UNIV_student-1 external_ids:container_iface=2-CERN \
+-- add-port l2-2 de3d6e5bb8ae5_l \
+-- set interface de3d6e5bb8ae5_l external_ids:container_id=2_L2_UNIV_CERN external_ids:container_iface=2-staff-1 \
+-- add-port l2-2 cb5fff76ff925_l \
+-- set interface cb5fff76ff925_l external_ids:container_id=2_L2_UNIV_staff-1 external_ids:container_iface=2-CERN \
+-- add-port l2-2 a7f5ad2b16eb5_l \
+-- set interface a7f5ad2b16eb5_l external_ids:container_id=2_L2_UNIV_ETHZ external_ids:container_iface=2-student-2 \
+-- add-port l2-2 484efdf909e45_l \
+-- set interface 484efdf909e45_l external_ids:container_id=2_L2_UNIV_student-2 external_ids:container_iface=2-ETHZ \
+-- add-port l2-2 e7e2185aa5345_l \
+-- set interface e7e2185aa5345_l external_ids:container_id=2_L2_UNIV_ETHZ external_ids:container_iface=2-staff-2 \
+-- add-port l2-2 5273a31aff8a5_l \
+-- set interface 5273a31aff8a5_l external_ids:container_id=2_L2_UNIV_staff-2 external_ids:container_iface=2-ETHZ \
+-- add-port l2-2 221d3acdcd3c5_l \
+-- set interface 221d3acdcd3c5_l external_ids:container_id=2_L2_UNIV_EPFL external_ids:container_iface=2-student-3 \
+-- add-port l2-2 26b86114725d5_l \
+-- set interface 26b86114725d5_l external_ids:container_id=2_L2_UNIV_student-3 external_ids:container_iface=2-EPFL \
+-- add-port l2-2 180143d5a1a05_l \
+-- set interface 180143d5a1a05_l external_ids:container_id=2_L2_UNIV_EPFL external_ids:container_iface=2-staff-3 \
+-- add-port l2-2 cb59f97af79e5_l \
+-- set interface cb59f97af79e5_l external_ids:container_id=2_L2_UNIV_staff-3 external_ids:container_iface=2-EPFL \
+-- add-port l2-2 bea9dacb3eee5_l \
+-- set interface bea9dacb3eee5_l external_ids:container_id=2_ZURIrouter external_ids:container_iface=ZURI-L2 \
+-- add-port l2-2 3dbfa967cf855_l \
+-- set interface 3dbfa967cf855_l external_ids:container_id=2_L2_UNIV_ETHZ external_ids:container_iface=ZURIrouter \
+-- add-port l2-2 02a552141d625_l \
+-- set interface 02a552141d625_l external_ids:container_id=2_GENErouter external_ids:container_iface=GENE-L2 \
+-- add-port l2-2 929ac03595d75_l \
+-- set interface 929ac03595d75_l external_ids:container_id=2_L2_UNIV_CERN external_ids:container_iface=GENErouter \
+-- add-port int-1 57f7628155a65_l \
+-- set interface 57f7628155a65_l external_ids:container_id=1_ZURIrouter external_ids:container_iface=port_PARI \
+-- add-port int-1 2d0661670ed85_l \
+-- set interface 2d0661670ed85_l external_ids:container_id=1_PARIrouter external_ids:container_iface=port_ZURI \
+-- add-port int-1 d8b4f41fd1045_l \
+-- set interface d8b4f41fd1045_l external_ids:container_id=1_ZURIrouter external_ids:container_iface=port_LOND \
+-- add-port int-1 c62bc80903ee5_l \
+-- set interface c62bc80903ee5_l external_ids:container_id=1_LONDrouter external_ids:container_iface=port_ZURI \
+-- add-port int-1 3692691c63395_l \
+-- set interface 3692691c63395_l external_ids:container_id=1_PARIrouter external_ids:container_iface=port_GENE \
+-- add-port int-1 cb26dd7d45a35_l \
+-- set interface cb26dd7d45a35_l external_ids:container_id=1_GENErouter external_ids:container_iface=port_PARI \
+-- add-port int-1 f82e2fadd1a45_l \
+-- set interface f82e2fadd1a45_l external_ids:container_id=1_PARIrouter external_ids:container_iface=port_LOND \
+-- add-port int-1 ac50c6e5f3245_l \
+-- set interface ac50c6e5f3245_l external_ids:container_id=1_LONDrouter external_ids:container_iface=port_PARI \
+-- add-port int-1 50df403685995_l \
+-- set interface 50df403685995_l external_ids:container_id=1_PARIrouter external_ids:container_iface=port_NEWY \
+-- add-port int-1 4fc4efe9fc665_l \
+-- set interface 4fc4efe9fc665_l external_ids:container_id=1_NEWYrouter external_ids:container_iface=port_PARI \
+-- add-port int-1 ad3f31b490fa5_l \
+-- set interface ad3f31b490fa5_l external_ids:container_id=1_PARIrouter external_ids:container_iface=port_MIAM \
+-- add-port int-1 4f7e8d7f5ccc5_l \
+-- set interface 4f7e8d7f5ccc5_l external_ids:container_id=1_MIAMrouter external_ids:container_iface=port_PARI \
+-- add-port int-1 cd7ebf6ece3d5_l \
+-- set interface cd7ebf6ece3d5_l external_ids:container_id=1_LONDrouter external_ids:container_iface=port_BOST \
+-- add-port int-1 119ded19b4de5_l \
+-- set interface 119ded19b4de5_l external_ids:container_id=1_BOSTrouter external_ids:container_iface=port_LOND \
+-- add-port int-1 3891ca77504b5_l \
+-- set interface 3891ca77504b5_l external_ids:container_id=1_LONDrouter external_ids:container_iface=port_NEWY \
+-- add-port int-1 db797f923d8c5_l \
+-- set interface db797f923d8c5_l external_ids:container_id=1_NEWYrouter external_ids:container_iface=port_LOND \
+-- add-port int-1 0ed10f73231e5_l \
+-- set interface 0ed10f73231e5_l external_ids:container_id=1_GENErouter external_ids:container_iface=port_MIAM \
+-- add-port int-1 fab839ff790f5_l \
+-- set interface fab839ff790f5_l external_ids:container_id=1_MIAMrouter external_ids:container_iface=port_GENE \
+-- add-port int-1 8a2ab342b0485_l \
+-- set interface 8a2ab342b0485_l external_ids:container_id=1_NEWYrouter external_ids:container_iface=port_BOST \
+-- add-port int-1 c70b35236ac55_l \
+-- set interface c70b35236ac55_l external_ids:container_id=1_BOSTrouter external_ids:container_iface=port_NEWY \
+-- add-port int-1 3a81517af39d5_l \
+-- set interface 3a81517af39d5_l external_ids:container_id=1_NEWYrouter external_ids:container_iface=port_ATLA \
+-- add-port int-1 f0dfc83646755_l \
+-- set interface f0dfc83646755_l external_ids:container_id=1_ATLArouter external_ids:container_iface=port_NEWY \
+-- add-port int-1 89ac4c17b95c5_l \
+-- set interface 89ac4c17b95c5_l external_ids:container_id=1_NEWYrouter external_ids:container_iface=port_MIAM \
+-- add-port int-1 695b257b5db65_l \
+-- set interface 695b257b5db65_l external_ids:container_id=1_MIAMrouter external_ids:container_iface=port_NEWY \
+-- add-port int-1 1f14aa3219f45_l \
+-- set interface 1f14aa3219f45_l external_ids:container_id=1_ATLArouter external_ids:container_iface=port_MIAM \
+-- add-port int-1 47d7221f8c905_l \
+-- set interface 47d7221f8c905_l external_ids:container_id=1_MIAMrouter external_ids:container_iface=port_ATLA \
+-- add-port int-2 346917b814d35_l \
+-- set interface 346917b814d35_l external_ids:container_id=2_ZURIrouter external_ids:container_iface=port_PARI \
+-- add-port int-2 95519b49b05c5_l \
+-- set interface 95519b49b05c5_l external_ids:container_id=2_PARIrouter external_ids:container_iface=port_ZURI \
+-- add-port int-2 7c453dae95265_l \
+-- set interface 7c453dae95265_l external_ids:container_id=2_ZURIrouter external_ids:container_iface=port_LOND \
+-- add-port int-2 48c3c0893c095_l \
+-- set interface 48c3c0893c095_l external_ids:container_id=2_LONDrouter external_ids:container_iface=port_ZURI \
+-- add-port int-2 b9ca6db45e665_l \
+-- set interface b9ca6db45e665_l external_ids:container_id=2_PARIrouter external_ids:container_iface=port_GENE \
+-- add-port int-2 c762cdaef08b5_l \
+-- set interface c762cdaef08b5_l external_ids:container_id=2_GENErouter external_ids:container_iface=port_PARI \
+-- add-port int-2 1c96a4bfc8705_l \
+-- set interface 1c96a4bfc8705_l external_ids:container_id=2_PARIrouter external_ids:container_iface=port_LOND \
+-- add-port int-2 04b6d15310a35_l \
+-- set interface 04b6d15310a35_l external_ids:container_id=2_LONDrouter external_ids:container_iface=port_PARI \
+-- add-port int-2 12a0559b28be5_l \
+-- set interface 12a0559b28be5_l external_ids:container_id=2_PARIrouter external_ids:container_iface=port_NEWY \
+-- add-port int-2 7daed37f1a945_l \
+-- set interface 7daed37f1a945_l external_ids:container_id=2_NEWYrouter external_ids:container_iface=port_PARI \
+-- add-port int-2 60b09a5226ff5_l \
+-- set interface 60b09a5226ff5_l external_ids:container_id=2_PARIrouter external_ids:container_iface=port_MIAM \
+-- add-port int-2 807c0a3dae345_l \
+-- set interface 807c0a3dae345_l external_ids:container_id=2_MIAMrouter external_ids:container_iface=port_PARI \
+-- add-port int-2 a0660d49486e5_l \
+-- set interface a0660d49486e5_l external_ids:container_id=2_LONDrouter external_ids:container_iface=port_BOST \
+-- add-port int-2 8d2b92ab3fcf5_l \
+-- set interface 8d2b92ab3fcf5_l external_ids:container_id=2_BOSTrouter external_ids:container_iface=port_LOND \
+-- add-port int-2 81159ed71d5d5_l \
+-- set interface 81159ed71d5d5_l external_ids:container_id=2_LONDrouter external_ids:container_iface=port_NEWY \
+-- add-port int-2 da0e18277c255_l \
+-- set interface da0e18277c255_l external_ids:container_id=2_NEWYrouter external_ids:container_iface=port_LOND \
+-- add-port int-2 929c7decf89e5_l \
+-- set interface 929c7decf89e5_l external_ids:container_id=2_GENErouter external_ids:container_iface=port_MIAM \
+-- add-port int-2 9d90b60b92885_l \
+-- set interface 9d90b60b92885_l external_ids:container_id=2_MIAMrouter external_ids:container_iface=port_GENE \
+-- add-port int-2 cd4091f4e2f05_l \
+-- set interface cd4091f4e2f05_l external_ids:container_id=2_NEWYrouter external_ids:container_iface=port_BOST \
+-- add-port int-2 0a89087aa5995_l \
+-- set interface 0a89087aa5995_l external_ids:container_id=2_BOSTrouter external_ids:container_iface=port_NEWY \
+-- add-port int-2 6cfe762b704b5_l \
+-- set interface 6cfe762b704b5_l external_ids:container_id=2_NEWYrouter external_ids:container_iface=port_ATLA \
+-- add-port int-2 e060572a5a855_l \
+-- set interface e060572a5a855_l external_ids:container_id=2_ATLArouter external_ids:container_iface=port_NEWY \
+-- add-port int-2 28d2b385a7845_l \
+-- set interface 28d2b385a7845_l external_ids:container_id=2_NEWYrouter external_ids:container_iface=port_MIAM \
+-- add-port int-2 be4369d48e7e5_l \
+-- set interface be4369d48e7e5_l external_ids:container_id=2_MIAMrouter external_ids:container_iface=port_NEWY \
+-- add-port int-2 23c22342dbd75_l \
+-- set interface 23c22342dbd75_l external_ids:container_id=2_ATLArouter external_ids:container_iface=port_MIAM \
+-- add-port int-2 c6a1d6269eca5_l \
+-- set interface c6a1d6269eca5_l external_ids:container_id=2_MIAMrouter external_ids:container_iface=port_ATLA \
+-- add-port ext-0 6d0745e594805_l \
+-- set interface 6d0745e594805_l external_ids:container_id=1_ZURIrouter external_ids:container_iface=ext_2_ZURI \
+-- add-port ext-0 085cd7c001ea5_l \
+-- set interface 085cd7c001ea5_l external_ids:container_id=2_ZURIrouter external_ids:container_iface=ext_1_ZURI \

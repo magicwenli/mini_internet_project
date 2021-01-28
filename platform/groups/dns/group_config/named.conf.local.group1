@@ -1,0 +1,8 @@
+zone "group1" {
+ type master;
+ file "/etc/bind/zones/db.group1";
+};
+zone "1.in-addr.arpa" {
+ type master;
+ file "/etc/bind/zones/db.1";
+};

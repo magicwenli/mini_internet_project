@@ -1,0 +1,2 @@
+include "/etc/bind/group_config/named.conf.local.group1";
+include "/etc/bind/group_config/named.conf.local.group2";
