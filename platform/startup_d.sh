@@ -6,8 +6,6 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-start=$(date +%s)
-
 # Check for programs we'll need.
 search_path () {
     save_IFS=$IFS
@@ -246,12 +244,8 @@ echo ""
 echo ""
 
 # restart dns server with new configs
-if [ -n "$(isula ps | grep "DNS")" ]; then
-    isula exec -d DNS service bind9 restart
+if [ -n "$(docker ps | grep "DNS")" ]; then
+    docker exec -d DNS service bind9 restart
 fi
 
 echo "$(date +%Y-%m-%d_%H-%M-%S)"
-
-end=$(date +%s)
-take=$(( end - start ))
-echo Time taken to execute commands is ${take} seconds.

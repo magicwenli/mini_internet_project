@@ -5,7 +5,6 @@
 set -o errexit
 set -o pipefail
 set -o nounset
-set -x
 
 DIRECTORY="$1"
 source "${DIRECTORY}"/config/subnet_config.sh
